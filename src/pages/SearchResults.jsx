@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import '../pages/css/propertiesList.css';
+import './css/propertiesList.css';
 import { Link } from 'react-router-dom';
 import { formatDistanceToNow, parseISO } from 'date-fns';
-import LoadingScreen from '../pages/loadingScreen';
+import LoadingScreen from './../Components/loadingScreen';
 
 const formatDate = (dateString) => {
     const date = parseISO(dateString);

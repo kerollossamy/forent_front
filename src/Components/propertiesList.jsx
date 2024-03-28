@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProperties } from '../MyStore/actions/fetchProperties';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import LoadingScreen from './loadingScreen';
-import './css/propertiesList.css';
+import '../pages/css/propertiesList.css';
 import Pagination from 'react-js-pagination';
 import { Link } from 'react-router-dom';
 import { formatDistanceToNow, parseISO } from 'date-fns';
+import LoadingScreen from './loadingScreen';
 
 const formatDate = (dateString) => {
   const date = parseISO(dateString);

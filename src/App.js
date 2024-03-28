@@ -9,21 +9,21 @@ import {
 import { Provider, useSelector } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import store, { persistor } from "./MyStore/store";
-import NavigationBar from "./Components/Navbar";
-import SignUp from "./pages/register";
-import LoginPre from "./pages/login";
-import Footer from "./Components/Footer";
-import HomePage from "./pages/homePage";
-import PropertyView from "./pages/ViewProperty";
-import UserProfile from "./pages/userProfile";
-import OwnerProperties from "./Components/OwnerProperties";
-import PageNotFound from "./pages/PageNotFound";
-import Requests from "./Components/requests";
-import PropertiesPage from "./Components/PropertiesPage";
-import AboutUs from "./Components/About";
-import PaymentPage from "./pages/paymentpage";
-import VerifyEmailPage from "./pages/verifyEmail";
-import SearchResults from './Components/SearchResults';
+import NavigationBar from './Components/Navbar';
+import PropertyView from './pages/ViewProperty';
+import HomePage from './pages/homePage';
+import PropertiesPage from './pages/PropertiesPage';
+import SearchResults from './pages/SearchResults';
+import PaymentPage from './pages/paymentpage';
+import VerifyEmailPage from './pages/verifyEmail';
+import Requests from './pages/requests';
+import SignUp from './pages/register';
+import UserProfile from './pages/userProfile';
+import OwnerProperties from './pages/OwnerProperties';
+import PageNotFound from './pages/PageNotFound';
+import Footer from './Components/Footer';
+import AboutUs from './pages/About';
+import LoginPre from './pages/login';
 
 function PrivateRoute({ children }) {
   const isEmailVerified = useSelector((state) => state.authReducer.isEmailVerified);

@@ -6,11 +6,11 @@ import Image from "react-bootstrap/Image";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import ValidSchema from "../schemas/reg";
-import "../pages/css/errors.css";
-import "../pages/css/register.css";
+import "./css/errors.css";
+import "./css/register.css";
 import axios from "axios";
 import { Alert } from "react-bootstrap";
-import "../pages/css/login.css";
+import "./css/login.css";
 
 export default function SignUp() {
   const [isSuccess, setIsSuccess] = useState(false);

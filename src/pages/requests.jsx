@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button, Card, Badge, Modal, Form } from "react-bootstrap";
-import LoadingScreen from "../pages/loadingScreen";
 import { formatDistanceToNow, parseISO } from "date-fns";
 import { useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import ReactPaginate from "react-paginate";
-import "../pages/css/requests.css";
+import "./css/requests.css";
 import { useNavigate } from "react-router-dom";
+import LoadingScreen from './../Components/loadingScreen';
 
 const Requests = () => {
   const [propertyRequests, setPropertyRequests] = useState([]);

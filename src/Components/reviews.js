@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchReviews, addReview, editReview, deleteReview } from '../MyStore/actions/reviews';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faPlus, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import LoadingScreen from './../pages/loadingScreen';
 import { Modal, Button, Form } from 'react-bootstrap';
 import RatingMeter from './ratingMeter';
 import '../pages/css/reviews.css';
 import { Alert } from 'react-bootstrap';
+import LoadingScreen from './loadingScreen';
 
 function ReviewsList({ userRole, userId, propertyId }) {
   const dispatch = useDispatch();
