@@ -6,15 +6,13 @@ body {
     margin-top: 20px;
     background-color: #ffffff;
     padding: 10px;
-}
-
-.col-name {
-    color: #495057;
-    font-weight: 600;
+    text-align: center;
 }
 
 .img-thumbnail {
-    width: 50%;
+    width: 18rem;
+    height: 17rem !important;
+    border-radius: 50% !important;
 }
 
 .profile-icon {
@@ -38,74 +36,12 @@ body {
 }
 
 .sub-title {
-    color: #9599ad;
+    color: #848798;
     font-size: 1.2rem;
     margin: 0;
 }
 
-.information-content .flex-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.information-content .flex-container p {
-    margin: 10px 0;
-}
-
-.post-list,
-.email-list {
-    list-style: none;
-    padding: 0;
-}
-
-.post-item,
-.email-item {
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-.post-title,
-.email-title {
-    font-size: 1.2rem;
-    color: #333;
-}
-
-.post-body {
-    color: #878a99;
-}
-
-.custom-nav {
-    background-color: #ffffff;
-    padding: 0 10px;
-}
-
-.custom-nav .nav-link {
-    color: #333;
-    font-weight: 600;
-}
-
-.custom-nav .nav-link.active {
-    color: #0ab39c;
-}
-
-tbody td {
-    padding: 10px;
-    color: #525252;
-    border-bottom: 1px solid #ddd;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 90px;
-    font-weight: 600;
-}
-
-tbody td i {
-    cursor: pointer;
-    color: #646464;
-    font-size: 1.1rem;
-    transition: 0.3s ease;
-}
-
-tbody td i:hover {
-    color: #0ab39c;
+.sub-title-title {
+    color: #495057;
+    margin: 0;
 }

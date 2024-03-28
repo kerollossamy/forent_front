@@ -1,181 +1,65 @@
-import { Col, Container } from "react-bootstrap";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import "./css/userProfile.css";
-import { useParams } from "react-router-dom";
-import LoadingScreen from "./loadingScreen";
-import profile_photo from "../images/blank_profile.png"
+import { Container, Row, Col, Image } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './css/userProfile.css';
+import { useParams } from 'react-router-dom';
+import LoadingScreen from '../Components/loadingScreen';
+import { format } from 'date-fns';
 
 const UserProfile = () => {
-  const [userData, setUserData] = useState({});
   const { userId } = useParams();
-  const [editMode, setEditMode] = useState(false);
-  const [userName, setUserName] = useState();
-  const [userNum, setUserNum] = useState();
+  const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const editedData = { name: userName, phone_number: userNum };
-
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/users/${userId}`
+          `http://127.0.0.1:8000/users/${userId}`
         );
-        setUserNum(userData.phone_number)
-        setUserName(userData.name);
         setUserData(response.data);
-        if (response.status === 200) {
-          setLoading(false);
-        }
+        setLoading(false);
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error('Error fetching user data:', error);
         setLoading(false);
       }
     };
     fetchData();
-  }, [userData.name, userData.phone_number, userId]);
+  }, [userId]);
 
+  if (loading) return <LoadingScreen />;
 
-  const handleEditClick = () => {
-    setEditMode(true);
-  };
+  return userData && (
+    <Container fluid className='mt-3'>
+      <Row className='justify-content-center'>
+        <Col md={6}>
+          <div>
+            <div className="circle-image text-center">
+              <Image src={userData.profile_picture} alt="" className="img-thumbnail" />
+              <p className='title'>{userData.name}</p>
+              <p className='sub-title'>{userData.role}</p>
+            </div>
 
-  const handleSaveClick = () => {
-    axios
-      .patch(`http://127.0.0.1:8000/api/users/${userId}/`, editedData)
-      .then((response) => {
-        if (response.status === 200) {
-          setUserData(response.data);
-          setEditMode(false);
-        }
-      })
-      .catch((error) => {
-        console.error("Error updating user data:", error);
-      });
-  };
+            <div className="my-3 text-center icons-container">
+              <i className="profile-icon my-1 mx-2 far fa-edit"></i>
+              <i className="profile-icon my-1 mx-2 fas fa-plus"></i>
+              <i className="profile-icon my-1 mx-2 far fa-envelope"></i>
+              {userData.phone_number && <i className="profile-icon my-1 mx-2 fas fa-phone-alt"></i>}
+            </div>
 
-  const handleInputChange = (e) => {
-    setUserName(e.target.value);
-  };
-  const handleNumberChange = (e) => {
-    setUserNum(e.target.value);
-  };
-
-  var dateObject = new Date(userData.registration_date);
-
-  var year = dateObject.getFullYear();
-  var month = dateObject.getMonth() + 1;
-  var day = dateObject.getDate();
-
-  if (loading || !userData) return <LoadingScreen />;
-  return (
-    <Container fluid className="mt-3 d-flex justify-content-center">
-      <Col sm={12} md={4}>
-        <div className="user-details-container">
-          <h4 className="col-name">User Detail</h4>
-          {editMode ? (
-            <div>
-              {/* Editing form */}
-              <div className="circle-image text-center">
-                <img
-                  src={profile_photo}
-                  alt="Profile"
-                  className="rounded-circle img-thumbnail"
-                  onError={(e) => {
-                    e.target.src = "src/images/blank_profile.png";
-                  }}
-                />
-                <p className="title">{userData.name}</p>
-              </div>
-              <div className="my-3 text-center icons-container">
-                <i
-                  className="profile-icon my-1 mx-2 far fa-save"
-                  onClick={handleSaveClick}
-                ></i>
-                <i
-                  className="profile-icon my-1 mx-2 far fa-window-close"
-                  onClick={() => setEditMode(false)}
-                ></i>
-              </div>
-              <h5 className="sub-title my-2">Edit Information</h5>
-              <div className="information-content pt-2">
-                {/* Input fields for editing */}
-                <div className="container">
-                  <div className="row">
-                    <div className="col-md-6">
-                      <div className="form-group">
-                        <label htmlFor="firstName">Full Name:</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="firstName"
-                          value={userName}
-                          onChange={handleInputChange}
-                        />
-                      </div>
-                    </div>
-                    <div className="col-md-6">
-                      <div className="form-group">
-                        <label htmlFor="phone">Phone:</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="phone"
-                          value={userNum}
-                          onChange={handleNumberChange}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <h5 className='sub-title my-2'>Information</h5>
+            <div className="information-content pt-2">
+              <div className="flex-container">
+                <p><b>Username: &#160;</b> {userData.username}</p>
+                <p><b>Email: &#160;</b> {userData.email}</p>
+                {userData.phone_number && <p><b>Phone: &#160;</b> {userData.phone_number}</p>}
+                <p><b>Created at: &#160;</b> {format(new Date(userData.registration_date), 'dd MMM, yyyy')}</p>
               </div>
             </div>
-          ) : (
-            // Display mode
-            <div>
-              {/* Display user information */}
-              <div className="circle-image text-center">
-                <img
-                  src={profile_photo}
-                  alt="Profile"
-                  className="rounded-circle img-thumbnail"
-                  onError={(e) => {
-                    e.target.src = "src/images/blank_profile.png";
-                  }}
-                />
-                <p className="title">{userData.name}</p>
-              </div>
 
-              <div className="my-3 text-center icons-container">
-                <i
-                  className="profile-icon my-1 mx-2 far fa-edit"
-                  onClick={handleEditClick}
-                ></i>
-              </div>
-              <h5 className="sub-title my-2">Information</h5>
-              <div className="information-content pt-2">
-                {/* Display user details */}
-                <div className="flex-container">
-                  <p>
-                    <b>Full name: &#160;</b> {userData.name}
-                  </p>
-                  <p>
-                    <b>Email: &#160;</b> {userData.email}
-                  </p>
-                  <p>
-                    <b>Phone: &#160;</b> {userData.phone_number}
-                  </p>
-                  <p>
-                    <b>Created at: &#160;</b> {day + "-" + month + "-" + year}
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-        {/* )} */}
-      </Col>
+          </div>
+        </Col>
+      </Row>
     </Container>
   );
 };
